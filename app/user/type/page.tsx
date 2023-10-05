@@ -1,5 +1,5 @@
 import { type Metadata } from "next";
-import UserCard from "../components/UserCard";
+import UserCard from "./components/UserCard";
 
 export const metadata: Metadata = {
   title: "User Details",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const page: React.FC = () => {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center gap-y-10">
-      <div className="flex flex-row gap-10">
+      <div className="flex flex-col md:flex-row my-6 max-md:gap-y-4 md:gap-10">
         <UserCard
           role="owner"
           description="A Turf Owner can manage and maintain turf-related activities."

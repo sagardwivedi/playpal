@@ -1,14 +1,10 @@
-import { Hero, Pricing, Section } from "@/components/LandingPage";
-import Footer from "@/components/LandingPage/Footer";
-import Testinomials from "@/components/LandingPage/Testinomials";
+import { Hero, Section, Footer } from "@/components/LandingPage";
 
 const Home = () => {
   return (
     <div>
       <Hero />
       <Section />
-      <Pricing />
-      <Testinomials />
       <Footer />
     </div>
   );

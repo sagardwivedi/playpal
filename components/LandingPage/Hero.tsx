@@ -9,7 +9,7 @@ export default function Hero() {
           <Emoji symbol="⚽" size={32} />
           <Link
             className="text-left leading-1.2 tracking-none hover:underline hover:underline-offset-2"
-            href={"/"}
+            href={"/turfs"}
           >
             Turfs
           </Link>

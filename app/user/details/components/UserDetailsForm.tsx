@@ -9,8 +9,22 @@ const UserDetailsForm = () => {
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
 
+  const handleSubmit = async (formData: FormData) => {
+    // User Information
+    const first_name = String(formData.get("first_name"));
+    const last_name = String(formData.get("last_name"));
+    const bio = String(formData.get("bio"));
+
+    // Company Information
+    const company_name = String(formData.get("company_name"));
+    const company_address = String(formData.get("company_address"));
+  };
+
   return (
-    <form className="flex w-full flex-row items-start gap-x-10" method="POST">
+    <form
+      className="flex w-full flex-row items-start gap-x-10"
+      action={handleSubmit}
+    >
       <div className="flex flex-1 flex-col gap-y-5">
         <div className="flex flex-col gap-y-1">
           <Label htmlFor="first_name" text="First Name" />
@@ -20,42 +34,19 @@ const UserDetailsForm = () => {
           <Label htmlFor="last_name" text="Last Name" />
           <Input id="last_name" name="last_name" required />
         </div>
-        <div className="flex flex-col gap-y-1">
-          <Label htmlFor="date_of_birth" text="Date of birth (Optional)" />
-          <Input type="date" id="date_of_birth" name="date_of_birth" />
-        </div>
 
         {role === "owner" ? (
           <>
             <div className="flex flex-col gap-y-1">
-              <Label htmlFor="business_name" text="Company Name" />
-              <Input name="business_name" id="business_name" required />
+              <Label htmlFor="company_name" text="Company Name" />
+              <Input name="company_name" id="company_name" required />
             </div>
             <div className="flex flex-col gap-y-1">
-              <Label htmlFor="business_address" text="Company Address" />
-              <Input name="business_address" id="business_address" required />
-            </div>
-            <div className="flex flex-1 flex-col gap-y-1">
-              <Label htmlFor="company_description" text="Company Description" />
-              <textarea
-                rows={8}
-                id="company_description"
-                name="company_description"
-                className="resize-none rounded-md"
-              />
+              <Label htmlFor="company_address" text="Company Address" />
+              <Input name="company_address" id="company_address" required />
             </div>
           </>
-        ) : (
-          <div className="flex flex-1 flex-col gap-y-1">
-            <Label htmlFor="bio" text="Bio (optional)" />
-            <textarea
-              rows={8}
-              id="bio"
-              name="bio"
-              className="resize-none rounded-md"
-            />
-          </div>
-        )}
+        ) : null}
         <div>
           <Button
             text="Submit"

@@ -11,10 +11,9 @@ const margarine = Margarine({
 });
 
 const instrument_sans = Instrument_Sans({
+  display: "swap",
   weight: ["500"],
   subsets: ["latin"],
-  style: "normal",
-  display: "swap",
   fallback: ["sans-serif"],
   variable: "--instrument_sans",
 });

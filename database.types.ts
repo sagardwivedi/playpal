@@ -6,174 +6,217 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
+export type TablesInsert<T extends keyof Database["public"]["Tables"]> =
+  Database["public"]["Tables"][T]["Insert"];
+
 export interface Database {
   public: {
     Tables: {
-      Bookings: {
+      bookings: {
         Row: {
           booking_date: string;
-          booking_id: string;
-          created_at: string;
-          end_time: string;
-          start_time: string;
+          booking_end_time: string;
+          booking_id: number;
+          booking_start_time: string;
           total_price: number;
-          turf_id: string;
-          updated_at: string;
+          turf_id: number;
           user_id: string;
         };
         Insert: {
           booking_date: string;
-          booking_id?: string;
-          created_at?: string;
-          end_time: string;
-          start_time: string;
+          booking_end_time: string;
+          booking_id?: number;
+          booking_start_time: string;
           total_price: number;
-          turf_id: string;
-          updated_at?: string;
+          turf_id: number;
           user_id: string;
         };
         Update: {
           booking_date?: string;
-          booking_id?: string;
-          created_at?: string;
-          end_time?: string;
-          start_time?: string;
+          booking_end_time?: string;
+          booking_id?: number;
+          booking_start_time?: string;
           total_price?: number;
-          turf_id?: string;
-          updated_at?: string;
+          turf_id?: number;
           user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "Bookings_turf_id_fkey";
+            foreignKeyName: "bookings_turf_id_fkey";
             columns: ["turf_id"];
-            referencedRelation: "Turfs";
+            referencedRelation: "turfs";
             referencedColumns: ["turf_id"];
           },
           {
-            foreignKeyName: "Bookings_user_id_fkey";
+            foreignKeyName: "bookings_user_id_fkey";
             columns: ["user_id"];
-            referencedRelation: "NormalUsers";
+            referencedRelation: "profiles";
             referencedColumns: ["user_id"];
           },
         ];
       };
-      NormalUsers: {
+      profiles: {
         Row: {
-          avatar_url: string | null;
           bio: string | null;
+          birth_date: string | null;
           created_at: string;
-          date_of_birth: string | null;
           first_name: string;
           last_name: string;
-          role: string | null;
           updated_at: string;
           user_id: string;
         };
         Insert: {
-          avatar_url?: string | null;
           bio?: string | null;
+          birth_date?: string | null;
           created_at?: string;
-          date_of_birth?: string | null;
           first_name: string;
           last_name: string;
-          role?: string | null;
           updated_at?: string;
           user_id: string;
         };
         Update: {
-          avatar_url?: string | null;
           bio?: string | null;
+          birth_date?: string | null;
           created_at?: string;
-          date_of_birth?: string | null;
           first_name?: string;
           last_name?: string;
-          role?: string | null;
           updated_at?: string;
           user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "NormalUsers_user_id_fkey";
+            foreignKeyName: "profiles_user_id_fkey";
             columns: ["user_id"];
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
         ];
       };
-      TurfOwners: {
+      reviews: {
         Row: {
-          business_address: string;
-          business_name: string;
+          comment: string;
+          rating: number;
+          review_date: string;
+          review_id: number;
+          turf_id: number;
+          user_id: string;
+        };
+        Insert: {
+          comment: string;
+          rating: number;
+          review_date: string;
+          review_id?: number;
+          turf_id: number;
+          user_id: string;
+        };
+        Update: {
+          comment?: string;
+          rating?: number;
+          review_date?: string;
+          review_id?: number;
+          turf_id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "reviews_turf_id_fkey";
+            columns: ["turf_id"];
+            referencedRelation: "turfs";
+            referencedColumns: ["turf_id"];
+          },
+          {
+            foreignKeyName: "reviews_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["user_id"];
+          },
+        ];
+      };
+      turf_owner: {
+        Row: {
+          comapny_bio: string;
+          company_address: string;
+          company_name: string;
           created_at: string;
-          description: string;
-          turf_owner_id: string;
+          phone_number: number;
+          turf_owner_id: number;
           updated_at: string;
           user_id: string;
         };
         Insert: {
-          business_address: string;
-          business_name: string;
+          comapny_bio: string;
+          company_address: string;
+          company_name: string;
           created_at?: string;
-          description: string;
-          turf_owner_id?: string;
+          phone_number: number;
+          turf_owner_id?: number;
           updated_at?: string;
           user_id: string;
         };
         Update: {
-          business_address?: string;
-          business_name?: string;
+          comapny_bio?: string;
+          company_address?: string;
+          company_name?: string;
           created_at?: string;
-          description?: string;
-          turf_owner_id?: string;
+          phone_number?: number;
+          turf_owner_id?: number;
           updated_at?: string;
           user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "TurfOwners_user_id_fkey";
+            foreignKeyName: "turf_owner_user_id_fkey";
             columns: ["user_id"];
-            referencedRelation: "NormalUsers";
+            referencedRelation: "profiles";
             referencedColumns: ["user_id"];
           },
         ];
       };
-      Turfs: {
+      turfs: {
         Row: {
-          address: string;
           capacity: number;
+          contact_email: string;
+          contact_phone: string;
           created_at: string;
+          location: string;
+          name: string;
           price: number;
-          turf_id: string;
-          turf_name: string;
-          turf_owner_id: string;
+          surface_type: string;
+          turf_id: number;
+          turf_owner_id: number;
           updated_at: string;
         };
         Insert: {
-          address: string;
           capacity: number;
+          contact_email: string;
+          contact_phone: string;
           created_at?: string;
+          location: string;
+          name: string;
           price: number;
-          turf_id?: string;
-          turf_name: string;
-          turf_owner_id: string;
+          surface_type: string;
+          turf_id?: number;
+          turf_owner_id: number;
           updated_at?: string;
         };
         Update: {
-          address?: string;
           capacity?: number;
+          contact_email?: string;
+          contact_phone?: string;
           created_at?: string;
+          location?: string;
+          name?: string;
           price?: number;
-          turf_id?: string;
-          turf_name?: string;
-          turf_owner_id?: string;
+          surface_type?: string;
+          turf_id?: number;
+          turf_owner_id?: number;
           updated_at?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "Turfs_turf_owner_id_fkey";
+            foreignKeyName: "turfs_turf_owner_id_fkey";
             columns: ["turf_owner_id"];
-            referencedRelation: "TurfOwners";
+            referencedRelation: "turf_owner";
             referencedColumns: ["turf_owner_id"];
           },
         ];

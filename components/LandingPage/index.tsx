@@ -1,5 +1,5 @@
 import Hero from "./Hero";
-import Pricing from "./Pricing";
 import Section from "./Section";
+import Footer from "./Footer";
 
-export { Hero, Pricing, Section };
+export { Hero, Section, Footer };
